@@ -11,12 +11,11 @@ spec:
     metadata:
       labels:
         app: website
-    spec:
-      containers:
-      - name: website-container
-        image: nginx:latest # Or your preferred web server image
+spec:
+  containers:
+    - name: website-container
       ports:
-            - containerPort: 80
+        - containerPort: 80
         volumeMounts:
         - name: website-data
           mountPath: /usr/share/nginx/html # Or the appropriate path for your web server
