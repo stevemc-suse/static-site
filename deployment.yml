@@ -51,4 +51,4 @@ spec:
     port: 80 # The port that the service exposes
     targetPort: 80 # The port the container is listening on
     nodePort: 30009 # Choose a port between 30000-32767
-  type: NodePort
+  type: ClusterIP
