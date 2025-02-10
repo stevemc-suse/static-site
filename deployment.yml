@@ -1,24 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mywebsite
+  name: website-deployment
 spec:
+  replicas: 1 # Adjust as needed
   selector:
     matchLabels:
-      app: mywebsite
+      app: website
   template:
     metadata:
       labels:
-        app: mywebsite
+        app: website
     spec:
       containers:
-      - name: z4
-        image: elbaziblog.azurecr.io/websites/elbazico:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+      - name: website-container
+        image: nginx:latest # Or your preferred web server image
         ports:
         - containerPort: 80
-      imagePullSecrets:
-        - name: acr-secret
+        volumeMounts:
+        - name: website-data
+          mountPath: /usr/share/nginx/html # Or the appropriate path for your web server
+      volumes:
+      - name: website-data
+        persistentVolumeClaim:
+          claimName: website-pvc
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: website-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce # Or ReadOnlyMany if applicable
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: longhorn # Replace with your Longhorn StorageClass name if different
