@@ -35,7 +35,7 @@ spec:
     - ReadWriteOnce # Or ReadOnlyMany if applicable
   resources:
     requests:
-      storage: 150Mi
+      storage: 200Mi
   storageClassName: longhorn # Replace with your Longhorn StorageClass name if different
 
 ---
