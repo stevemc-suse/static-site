@@ -15,8 +15,8 @@ spec:
       containers:
       - name: website-container
         image: nginx:latest # Or your preferred web server image
-        ports:
-        - containerPort: 80
+      ports:
+            - containerPort: 80
         volumeMounts:
         - name: website-data
           mountPath: /usr/share/nginx/html # Or the appropriate path for your web server
