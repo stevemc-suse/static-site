@@ -37,3 +37,19 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: longhorn # Replace with your Longhorn StorageClass name if different
+
+
+  ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: website-service
+spec:
+  selector:
+    app: website
+  ports:
+  - protocol: TCP
+    port: 80 # The port that the service exposes
+    targetPort: 80 # The port the container is listening on
+    nodePort: 30009 # Choose a port between 30000-32767
+  type: NodePort
